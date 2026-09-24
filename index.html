@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Neural Field Ensembles for Aerodynamic Surface Prediction: Winning Solution to the ONERA CRM Wall Distribution 2025 Challenge - Lionel Salesses, Caroline Sainvitu, Tariq Benamara">
+  <meta name="description" content="A coordinate-based neural-field methodology for aerodynamic surrogate modeling, achieving first place in the ONERA CRM Wall Distribution Regression Challenge.">
+  <meta name="keywords" content="Aerodynamic surrogate modeling, Neural fields, Fourier feature encoding, Computational Fluid Dynamics (CFD), Machine Learning, Aircraft aerodynamics, Skin-friction prediction, Wall pressure distribution, NASA Common Research Model">
+  <meta name="author" content="Lionel Salesses, Caroline Sainvitu, Tariq Benamara">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <title>Neural Field Ensembles for Aerodynamic Surface Prediction: Winning Solution to the ONERA CRM Wall Distribution 2025 Challenge</title>
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="static/css/juxtapose.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/juxtapose.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+</head>
+<body>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Neural Field Ensembles for Aerodynamic Surface Prediction: Winning Solution to the ONERA CRM Wall Distribution 2025 Challenge</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Lionel Salesses,</span>
+                <span class="author-block">Caroline Sainvitu,</span>
+                  <span class="author-block">Tariq Benamara</span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Cenaero<br>2026</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2609.17160.pdf" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2609.17160" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="content has-text-centered">
+  <figure class="image">
+    <img src="static/images/Full-arch-opt.png"
+         alt="Methodology overview"
+         style="width: 65%; margin: 0 auto;">
+  </figure>
+</div>
+
+    
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Machine-learning surrogate models offer a promising alternative to high-fidelity Computational Fluid Dynamics (CFD) simulations for aerodynamic analysis and design. However, constructing accurate surrogates for realistic aircraft configurations remain challenging due to complex geometries, multiple flow regimes, and limited training data. This work presents the methodology that achieved first place in the ONERA CRM Wall Distribution Regression Challenge, which focuses on predicting pressure and skin-friction coefficient distributions over the NASA Common Research Model wing-body-pylon-nacelle configuration under different operating conditions. The proposed approach formulates the problem as a conditional neural field mapping spatial coordinates, surface normals, and operating conditions to aerodynamic wall quantities. Fourier feature encoding, a relative squared error objective aligned with the challenge metric, ensemble learning, and k-fold cross-validation are progressively introduced to improve prediction accuracy and exploit the limited training data. Beyond presenting the final methodology, the paper documents the successive model design choices that led to the winning solution through a comprehensive ablation study and discusses several alternative approaches that were investigated but ultimately discarded. On the hidden competition test set, the proposed methodology achieves an overall score of 8.81, outperforming the strongest organizer-provided baseline, which achieved a score of 8.64, while requiring approximately three orders of magnitude fewer trainable parameters. These results illustrate that carefully designed coordinate-based neural fields constitute an efficient and robust framework for aerodynamic surrogate modeling on complex geometries under limited-data conditions.          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- ========================= Challenge -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">The Challenge</h2>
+
+    <div class="content">
+      <p>
+        The ONERA CRM Wall Distribution Challenge considers the prediction of
+        aerodynamic surface quantities for the NASA CRM Wing-Body-Pylon-Nacelle (CRM-WBPN) configuration.
+        Given the surface geometry and aerodynamic conditions, the objective is
+        to predict the pressure coefficient and the three components of the
+        skin-friction coefficient over 260,774 surface points.
+      </p>
+
+      <p>
+        The dataset contains 468 omputational Fluid Dynamics (CFD) simulations, with 312 configurations
+        available for model development. The challenge is demanding because the dataset combines
+        a complex three-dimensional geometry, multiple aerodynamic regimes,
+        localized flow phenomena such as shocks and separation, and a limited
+        number of available CFD simulations. The CFD mesh connectivity is not
+        provided. Only surface coordinates, surface normals,
+        aerodynamic conditions, and wall quantities are available.
+      </p>
+    </div>
+
+    <figure class="image has-text-centered">
+      <img src="static/images/crm_geometry-opt.png"
+           alt="CRM-WBPN configuration"
+           style="width: 60%; margin: 0 auto;">
+    </figure>
+  </div>
+</section>
+
+
+<!-- ========================= Method -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Proposed Methodology</h2>
+
+    <div class="content">
+      <p>
+        We formulate the problem as a conditional neural field. A fully
+        connected neural network predicts the four aerodynamic quantities from
+        the surface coordinates, normal vector, and operating conditions
+        (Mach number, angle of attack, and stagnation pressure).
+      </p>
+
+      <div class="content">
+      <h3 class="title is-5">Mesh-independent representation</h3>
+
+      <p>
+        Because the CFD mesh is unavailable, the model operates directly on
+        the point-wise representation of the aircraft surface. No mesh
+        connectivity or manually constructed surface parameterization is
+        required.
+      </p>
+
+      <h3 class="title is-5">Fourier feature encoding</h3>
+
+      <p>
+        Standard MLPs tend to learn low-frequency components preferentially.
+        To improve the representation of localized flow structures, the
+        Cartesian coordinates are transformed using Fourier feature encoding
+        before being provided to the neural network.
+      </p>
+
+      <h3 class="title is-5">Metric-aligned training</h3>
+
+      <p>
+        The challenge score combines global accuracy with a worst-case relative
+        error. We therefore replace the conventional mean squared error with a
+        relative squared error objective, encouraging the model to reduce
+        relative prediction errors across the different flow configurations.
+      </p>
+
+      <h3 class="title is-5">Ensemble learning</h3>
+
+      <p>
+        Multiple neural fields are trained independently and their predictions
+        are averaged. This reduces the variance associated with individual
+        models and improves robustness, particularly for difficult
+        configurations.
+      </p>
+
+      <h3 class="title is-5">K-fold cross-validation</h3>
+
+      <p>
+        Finally, the available 312 simulations are partitioned into five folds.
+        Models trained on the different folds are combined into the final
+        ensemble, allowing every available simulation to contribute to model
+        training while increasing ensemble diversity.
+      </p>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========================= Progressive Development -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Progressive Development</h2>
+
+    <div class="content">
+      <p>
+        The final solution was obtained through a progressive development
+        process. Starting from a simple neural field, we successively
+        introduced Fourier features, increased model capacity, adopted a
+        relative squared error loss, and finally incorporated ensemble learning
+        and k-fold cross-validation.
+      </p>
+    </div>
+
+    <figure class="image has-text-centered">
+      <img src="static/images/ablation_table_opt.png"
+           alt="Progressive development and ablation results"
+           style="width: 50%; margin: 0 auto;">
+    </figure>
+
+  </div>
+</section>
+
+
+<!-- ========================= Results ========================= -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Results</h2>
+
+    <div class="content">
+      <p>
+        The final ensemble achieved a score of <strong>8.81</strong> on the
+        hidden competition test set, compared with <strong>8.64</strong> for
+        the strongest organizer-provided baseline, the Global MLP.
+        The neural-field solution uses approximately three orders of magnitude
+        fewer trainable parameters.
+      </p>
+    </div>
+
+    <figure class="image has-text-centered">
+      <img src="static/images/results_opt.png"
+           alt="Comparison with organizer-provided baselines"
+           style="width: 50%; margin: 0 auto;">
+      <figcaption class="has-text-centered">
+        Comparison with organizer-provided baselines
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Qualitative Results</h2>
+    <figure class="image-grid has-text-centered">
+      <div class="columns is-multiline is-centered">
+      <div class="column is-half">
+          <div class="juxtapose" data-startingposition="50%" style="width: 90%;">
+              <img src="static/images/figscatter_Minf_0.85_AoA_1.5_Pi_1.0_cp.png" data-label="Pressure reference" alt="Pressure reference"/>
+              <img src="static/images/figscatter_Minf_0.85_AoA_1.5_Pi_1.0_cphat.png" data-label="Pressure prediction" alt="Pressure prediction"/>
+          </div>
+      </div>
+      <div class="column is-half">
+        <div class="juxtapose" data-startingposition="50%" style="width: 90%;">
+            <img src="static/images/figscatter_Minf_0.85_AoA_1.5_Pi_1.0_cf.png" data-label="Friction reference" alt="Friction reference"/>
+            <img src="static/images/figscatter_Minf_0.85_AoA_1.5_Pi_1.0_cfhat.png" data-label="Friction prediction" alt="Friction prediction"/>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="juxtapose" data-startingposition="50%" style="width: 90%;">
+            <img src="static/images/figscatter_Minf_0.96_AoA_-2.0_Pi_2.0_cp.png" data-label="Pressure reference" alt="Pressure reference"/>
+            <img src="static/images/figscatter_Minf_0.96_AoA_-2.0_Pi_2.0_cphat.png" data-label="Pressure prediction" alt="Pressure prediction"/>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="juxtapose" data-startingposition="50%" style="width: 90%;">
+            <img src="static/images/figscatter_Minf_0.96_AoA_-2.0_Pi_2.0_cf.png" data-label="Friction reference" alt="Friction reference"/>
+            <img src="static/images/figscatter_Minf_0.96_AoA_-2.0_Pi_2.0_cfhat.png" data-label="Friction prediction" alt="Friction prediction"/>
+        </div>
+      </div>
+    </div>
+    </figure>
+  </div>
+</section>
+
+
+<!-- ========================= Resources -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Resources</h2>
+
+    <a class="button is-link"
+       href="https://www.codabench.org/competitions/7535/"
+       target="_blank">
+      <span>Challenge page on Codabench</span>
+    </a>
+
+    <a class="button is-link"
+         href="https://www.codabench.org/competitions/7535/#/results-tab"
+         target="_blank">
+        <span class="icon"><i class="fas fa-trophy"></i></span>
+        <span>Leaderboard</span>
+    </a>
+
+    <a class="button is-link"
+         href="https://arxiv.org/abs/2505.06265"
+         target="_blank">
+        <span>Organizer's reference paper</span>
+    </a>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Acknowledgments</h2>
+    <div class="content">
+      <p>
+        This work is supported by the "ARIAC by DigitalWallonia4.ai" research project (grant agreement No 2010235 – TRAIL institute) and benefited from computational resources made available on Lucia, the Tier-1 supercomputer of the Walloon Region, infrastructure funded by the Walloon Region (grant agreement No 1910247).
+      </p>
+    </div>
+  </div>
+</section>
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@article{salesses2026neural,
+      title={Neural Field Ensembles for Aerodynamic Surface Prediction: Winning Solution to the ONERA CRM Wall Distribution 2025 Challenge}, 
+      author={Lionel Salesses and Caroline Sainvitu and Tariq Benamara},
+      year={2026},
+      eprint={2609.17160},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      journal={arXiv preprint arXiv:2609.17160},
+      url={https://arxiv.org/abs/2609.17160}, 
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+  </html>
