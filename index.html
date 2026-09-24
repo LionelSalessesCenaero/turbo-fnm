@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <!-- Primary Meta Tags -->
-  <meta name="title" content="Neural Field Ensembles for Aerodynamic Surface Prediction: Winning Solution to the ONERA CRM Wall Distribution 2025 Challenge - Lionel Salesses, Caroline Sainvitu, Tariq Benamara">
+  <meta name="title" content="Periodic Neural Mapping for Unsteady Rotor-Blade Pressure and Aeroelastic Load Prediction - Lionel Salesses, Joachim Dominique, Tariq Benamara, Théo Flament, Franck Mastrippolito">
   <meta name="description" content="A coordinate-based neural-field methodology for aerodynamic surrogate modeling, achieving first place in the ONERA CRM Wall Distribution Regression Challenge.">
-  <meta name="keywords" content="Aerodynamic surrogate modeling, Neural fields, Fourier feature encoding, Computational Fluid Dynamics (CFD), Machine Learning, Aircraft aerodynamics, Skin-friction prediction, Wall pressure distribution, NASA Common Research Model">
-  <meta name="author" content="Lionel Salesses, Caroline Sainvitu, Tariq Benamara">
+  <meta name="keywords" content="Aerodynamic surrogate modeling, Neural Operator, Fourier Neural Operator, FNO, Fourier Neural Mapping, Computational Fluid Dynamics (CFD), Machine Learning, Turbomachinery, Unsteady Flow, Aeroelastic load, Generalized Aerodynamic Force">
+  <meta name="author" content="Lionel Salesses, Joachim Dominique, Tariq Benamara, Théo Flament, Franck Mastrippolito">
   <meta name="robots" content="index, follow">
   <meta name="language" content="English">
 
@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://documentcloud.adobe.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-  <title>Neural Field Ensembles for Aerodynamic Surface Prediction: Winning Solution to the ONERA CRM Wall Distribution 2025 Challenge</title>
+  <title>Periodic Neural Mapping for Unsteady Rotor-Blade Pressure and Aeroelastic Load Prediction</title>
   
   <!-- Favicon and App Icons -->
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
@@ -76,15 +76,18 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Neural Field Ensembles for Aerodynamic Surface Prediction: Winning Solution to the ONERA CRM Wall Distribution 2025 Challenge</h1>
+            <h1 class="title is-1 publication-title">Periodic Neural Mapping for Unsteady Rotor-Blade Pressure and Aeroelastic Load Prediction</h1>
             <div class="is-size-5 publication-authors">
-              <span class="author-block">Lionel Salesses,</span>
-                <span class="author-block">Caroline Sainvitu,</span>
-                  <span class="author-block">Tariq Benamara</span>
+              <span class="author-block">Lionel Salesses</span><sup>1</sup>
+              <span class="author-block">Joachim Dominique</span><sup>1</sup>
+              <span class="author-block">Tariq Benamara</span><sup>1</sup>
+              <span class="author-block">Théo Flament</span><sup>2</sup>
+              <span class="author-block">Franck Mastrippolito</span><sup>2</sup>
             </div>
 
             <div class="is-size-5 publication-authors">
-              <span class="author-block">Cenaero<br>2026</span>
+              <sup>1</sup>:<span class="author-block">Cenaero<br>2026</span>
+              <sup>2</sup>:<span class="author-block">Safran Helicopter Engines<br>2026</span>
             </div>
 
             <div class="column has-text-centered">
@@ -133,7 +136,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Machine-learning surrogate models offer a promising alternative to high-fidelity Computational Fluid Dynamics (CFD) simulations for aerodynamic analysis and design. However, constructing accurate surrogates for realistic aircraft configurations remain challenging due to complex geometries, multiple flow regimes, and limited training data. This work presents the methodology that achieved first place in the ONERA CRM Wall Distribution Regression Challenge, which focuses on predicting pressure and skin-friction coefficient distributions over the NASA Common Research Model wing-body-pylon-nacelle configuration under different operating conditions. The proposed approach formulates the problem as a conditional neural field mapping spatial coordinates, surface normals, and operating conditions to aerodynamic wall quantities. Fourier feature encoding, a relative squared error objective aligned with the challenge metric, ensemble learning, and k-fold cross-validation are progressively introduced to improve prediction accuracy and exploit the limited training data. Beyond presenting the final methodology, the paper documents the successive model design choices that led to the winning solution through a comprehensive ablation study and discusses several alternative approaches that were investigated but ultimately discarded. On the hidden competition test set, the proposed methodology achieves an overall score of 8.81, outperforming the strongest organizer-provided baseline, which achieved a score of 8.64, while requiring approximately three orders of magnitude fewer trainable parameters. These results illustrate that carefully designed coordinate-based neural fields constitute an efficient and robust framework for aerodynamic surrogate modeling on complex geometries under limited-data conditions.          </p>
+            Accurate prediction of unsteady aerodynamic loads remains a major challenge in turbomachinery design. High-fidelity Computational Fluid Dynamics (CFD) simulations are computationally expensive, while aeroelastic Quantities of Interest (QoI) depend sensitively on the temporal evolution of the pressure field. In this work, we introduce a neural-operator-based framework, named periodic Fourier Neural Mapping (p-FNM), for the prediction of unsteady pressure distributions on turbine rotor blades simulated using chorochronic numerical hypothesis. The proposed architecture embeds temporal periodicity directly into the model formulation and learns a continuous mapping from operating conditions and time to pressure fields. Unlike sequential latent-space approaches, the proposed formulation predicts pressure fields independently at any time, thereby preserving temporal continuity and avoiding error accumulation. The proposed p-FNM is evaluated on a database of unsteady rotor-blade simulations and compared with a state-of-the-art reduced-order baseline based on a variational autoencoder and recurrent neural network, referred to as the Temporal Prediction Model (TPM). Performance is assessed both on pressure-field reconstruction and on the prediction of Generalized Aerodynamic Forces (GAFs), which constitute the primary aeroelastic QoI. Across all considered training datasets, the proposed model consistently outperforms the TPM. On the largest dataset, the p-FNM achieves a pressure-field mean absolute percentage error of 0.46<span>&#37;</span> and a GAF-magnitude prediction error of 4.42<span>&#37;</span>, corresponding to relative improvements of approximately 60.7<span>&#37;</span> and 77.6<span>&#37;</span> over the TPM baseline, respectively. The minimum weighted phase error reaches 0.060 rad, demonstrating the ability of the proposed framework to accurately preserve the temporal characteristics of the aerodynamic response. The analysis further shows that GAF prediction is substantially more challenging than pressure-field reconstruction and that temporal coherence plays a critical role in the accurate prediction of spectral aerodynamic quantities. These results highlight the potential of neural-operator formulations for learning periodic unsteady aerodynamic manifolds and demonstrate their suitability for reduced-order modeling, aeroelastic analysis, and future machine-learning-assisted turbomachinery design workflows.</p>
         </div>
       </div>
     </div>
