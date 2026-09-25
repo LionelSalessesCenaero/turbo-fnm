@@ -61,7 +61,18 @@
   <script defer src="static/js/bulma-slider.min.js"></script>
   <script defer src="static/js/juxtapose.js"></script>
   <script defer src="static/js/index.js"></script>
-  
+  <style>
+    .square-video {
+      aspect-ratio: 1 / 1;
+    }
+    
+    .square-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+  </style>
 </head>
 <body>
 
@@ -120,7 +131,7 @@
       <h2 class="title is-3">Unsteady pressure prediction compared to ground truth.</h2>
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <div class="publication-video">
+          <div class="publication-video square-video">
             <video controls muted loop playsinline preload="metadata">
               <source src="static/videos/pressure-video.mp4" type="video/mp4">
             </video>
