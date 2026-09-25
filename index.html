@@ -35,6 +35,19 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
   <link rel="stylesheet" href="static/css/juxtapose.css">
+
+  <style>
+    .square-video {
+      aspect-ratio: 1 / 1;
+    }
+    
+    .square-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+  </style>
   
   <!-- Non-critical CSS - Load asynchronously -->
   <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -61,18 +74,6 @@
   <script defer src="static/js/bulma-slider.min.js"></script>
   <script defer src="static/js/juxtapose.js"></script>
   <script defer src="static/js/index.js"></script>
-  <style>
-    .square-video {
-      aspect-ratio: 1 / 1;
-    }
-    
-    .square-video video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-  </style>
 </head>
 <body>
 
@@ -132,7 +133,7 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <div class="publication-video square-video">
-            <video controls muted loop playsinline preload="metadata">
+            <video controls muted loop playsinline preload="metadata" style="width:100%; height:auto; display:block;>
               <source src="static/videos/pressure-video.mp4" type="video/mp4">
             </video>
           </div>
