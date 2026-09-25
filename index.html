@@ -131,6 +131,7 @@
 </section>
   
 
+<!--
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
@@ -146,10 +147,29 @@
     </div>
   </div>
 </section>
-
+-->
+<!-- ========================= Problem -->
+    
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-two-thirds">
+          <div class="publication-video">
+            <video controls muted loop playsinline preload="metadata">
+              <source src="static/videos/schlieren_ps_cenaero.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    
+<!-- ========================= Pressure results -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Videos</h2>
+    <h2 class="title is-3 has-text-centered">Unsteady pressure predictions</h2>
 
     <div class="columns is-multiline">
       <div class="column is-half">
@@ -199,16 +219,52 @@
   </div>
 </section>
 
-    
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-two-thirds">
-          <div class="publication-video">
-            <video controls muted loop playsinline preload="metadata">
-              <source src="static/videos/schlieren_ps_cenaero.mp4" type="video/mp4">
-            </video>
+<!-- ========================= GAF results -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Generalized aerodynamic forces predictions</h2>
+
+    <div class="columns is-multiline">
+      <div class="column is-half">
+        <div class="content has-text-centered">
+          <h3 class="title is-5">Training set: Small</h3>
+          <div class="column is-6">
+            <figure class="image">
+              <img src="static/images/PeriodicFNM_Small_GAFnorm_err.png" alt="GAF prediction for small training set">
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-half">
+        <div class="content has-text-centered">
+          <h3 class="title is-5">Training set: Medium</h3>
+          <div class="column is-6">
+            <figure class="image">
+              <img src="static/images/PeriodicFNM_Medium_GAFnorm_err.png" alt="GAF prediction for medium training set">
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-half">
+        <div class="content has-text-centered">
+          <h3 class="title is-5">Training set: Large</h3>
+          <div class="column is-6">
+            <figure class="image">
+              <img src="static/images/PeriodicFNM_Large_GAFnorm_err.png" alt="GAF prediction for large training set">
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-half">
+        <div class="content has-text-centered">
+          <h3 class="title is-5">Training set: Extra Large</h3>
+          <div class="column is-6">
+            <figure class="image">
+              <img src="static/images/PeriodicFNM_ExtraLarge_GAFnorm_err.png" alt="GAF prediction for extra large training set">
+            </figure>
           </div>
         </div>
       </div>
@@ -216,6 +272,8 @@
   </div>
 </section>
     
+
+<!-- ========================= WIP -->
   <section class="hero is-fullheight is-light">
   <div class="hero-body">
     <div class="container">
