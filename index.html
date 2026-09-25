@@ -112,15 +112,214 @@
     </div>
   </div>
 </section>
-    
+  
+
+  <section class="hero is-fullheight is-light">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-vcentered">
+        <div class="column is-6">
+          <p class="title is-2">Periodic Neural Mapping for Unsteady Rotor-Blade Pressure and Aeroelastic Load Prediction</p>
+          <p class="subtitle is-5">
+            Learning periodic unsteady pressure fields with neural operators to improve aeroelastic load prediction.
+          </p>
+
+          <div class="buttons">
+            <a class="button is-link is-rounded" href="https://arxiv.org/abs/2609.21590" target="_blank">Paper</a>
+            <a class="button is-dark is-rounded" href="#" target="_blank">Code</a>
+            <a class="button is-info is-rounded" href="#" target="_blank">Project</a>
+          </div>
+
+          <div class="content">
+            <p>
+              <strong>TL;DR:</strong> p-FNM learns a continuous mapping from operating conditions and time to rotor-blade pressure fields, preserving periodicity and improving GAF prediction.
+            </p>
+          </div>
+        </div>
+
+        <div class="column is-6">
+          <figure class="image">
+            <img src="images/teaser.png" alt="Teaser figure">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <div class="box">
+          <h2 class="title is-4">Overview</h2>
+          <p>
+            This paper addresses unsteady pressure prediction on a transonic rotor blade under varying operating conditions.
+            The goal is not only to reconstruct the pressure field accurately, but also to preserve the temporal coherence
+            needed for reliable generalized aerodynamic forces (GAFs).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section has-background-white-bis">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-4">Motivation</h2>
+        <div class="content">
+          <p>
+            High-fidelity URANS simulations are expensive, while aeroelastic quantities depend strongly on the time evolution
+            of the pressure field. Sequential latent-space models can accumulate errors over time and degrade spectral accuracy.
+            This motivates a continuous-time operator-learning formulation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-4">Method</h2>
+        <div class="columns is-variable is-6">
+          <div class="column">
+            <div class="box">
+              <h3 class="title is-6">Input</h3>
+              <p>Operating conditions <em>(α, β, d, Π)</em> and periodic time <em>t</em>.</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="box">
+              <h3 class="title is-6">Periodic encoding</h3>
+              <p>Time is embedded as <em>(cos(2πt/T), sin(2πt/T))</em> to remove boundary discontinuities.</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="box">
+              <h3 class="title is-6">p-FNM</h3>
+              <p>A vector-to-function block followed by Fourier layers learns the pressure field directly.</p>
+            </div>
+          </div>
+        </div>
+
+        <figure class="image mt-5">
+          <img src="images/figure3.png" alt="p-FNM architecture, see Figure 3">
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section has-background-white-bis">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-4">Dataset</h2>
+        <div class="content">
+          <p>
+            The database contains four training regimes: Small, Medium, Large, and Extra Large, with 20, 40, 80, and 160
+            simulations, plus a separate test set of 40 simulations. Each sample contains 192 time snapshots over one blade-passing period.
+          </p>
+        </div>
+
+        <figure class="image">
+          <img src="images/figure2.png" alt="Dataset and simulation setup, see Figure 2">
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-4">Results</h2>
+        <div class="content">
+          <p>
+            p-FNM consistently outperforms the TPM baseline on pressure reconstruction and GAF prediction.
+            On the largest dataset, it reaches 0.46% pressure MAPE and 4.42% GAF magnitude MAPE.
+          </p>
+        </div>
+
+        <div class="columns is-variable is-5">
+          <div class="column">
+            <figure class="image">
+              <img src="images/figure4.png" alt="Pressure prediction results, see Figure 4">
+            </figure>
+          </div>
+          <div class="column">
+            <figure class="image">
+              <img src="images/figure5.png" alt="GAF prediction results, see Figure 5">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section has-background-white-bis">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-4">Key observations</h2>
+        <div class="content">
+          <ul>
+            <li>Pressure errors are mostly concentrated near shock waves.</li>
+            <li>Temporal coherence is critical for accurate spectral quantities.</li>
+            <li>Direct GAF prediction performs worse than predicting pressure first.</li>
+            <li>More training data improves both pressure and GAF accuracy.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-4">Qualitative examples</h2>
+        <div class="columns is-variable is-5">
+          <div class="column">
+            <figure class="image">
+              <img src="images/table9.png" alt="Qualitative pressure field examples, see Table 9">
+            </figure>
+          </div>
+          <div class="column">
+            <figure class="image">
+              <img src="images/table10.png" alt="Error maps and comparisons, see Table 10">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Acknowledgments</h2>
+    <div class="content"><p>
+        The presented work has been performed in the framework of the HE-ART project, part of the Clean Aviation Joint Undertaking, and funded by the European Union’s Horizon 2020 research and innovation programme under grant agreement N° 101102013. It was also supported by the "ARIAC by DigitalWallonia4.ai" research project (grant agreement No 2010235– TRAIL institute) and benefited from computational resources made available on the Tier-1 supercomputer of the Fédération Wallonie-Bruxelles, infrastructure funded by the Walloon Region under grant agreement N° 1910847.      </p>
+    </div>
+  </div>
+</section>
+
 <!-- Paper abstract -->
 <section class="section hero is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified is-7">
-          <p>
+        <div class="content has-text-justified is-7"><p>
             Accurate prediction of unsteady aerodynamic loads remains a major challenge in turbomachinery design. High-fidelity Computational Fluid Dynamics (CFD) simulations are computationally expensive, while aeroelastic Quantities of Interest (QoI) depend sensitively on the temporal evolution of the pressure field. In this work, we introduce a neural-operator-based framework, named periodic Fourier Neural Mapping (p-FNM), for the prediction of unsteady pressure distributions on turbine rotor blades simulated using chorochronic numerical hypothesis. The proposed architecture embeds temporal periodicity directly into the model formulation and learns a continuous mapping from operating conditions and time to pressure fields. Unlike sequential latent-space approaches, the proposed formulation predicts pressure fields independently at any time, thereby preserving temporal continuity and avoiding error accumulation. The proposed p-FNM is evaluated on a database of unsteady rotor-blade simulations and compared with a state-of-the-art reduced-order baseline based on a variational autoencoder and recurrent neural network, referred to as the Temporal Prediction Model (TPM). Performance is assessed both on pressure-field reconstruction and on the prediction of Generalized Aerodynamic Forces (GAFs), which constitute the primary aeroelastic QoI. Across all considered training datasets, the proposed model consistently outperforms the TPM. On the largest dataset, the p-FNM achieves a pressure-field mean absolute percentage error of 0.46<span>&#37;</span> and a GAF-magnitude prediction error of 4.42<span>&#37;</span>, corresponding to relative improvements of approximately 60.7<span>&#37;</span> and 77.6<span>&#37;</span> over the TPM baseline, respectively. The minimum weighted phase error reaches 0.060 rad, demonstrating the ability of the proposed framework to accurately preserve the temporal characteristics of the aerodynamic response. The analysis further shows that GAF prediction is substantially more challenging than pressure-field reconstruction and that temporal coherence plays a critical role in the accurate prediction of spectral aerodynamic quantities. These results highlight the potential of neural-operator formulations for learning periodic unsteady aerodynamic manifolds and demonstrate their suitability for reduced-order modeling, aeroelastic analysis, and future machine-learning-assisted turbomachinery design workflows.</p>
         </div>
       </div>
@@ -128,206 +327,6 @@
   </div>
 </section>
 <!-- End paper abstract -->
-
-    <section class="hero is-fullheight is-light">
-    <div class="hero-body">
-      <div class="container">
-        <div class="columns is-vcentered">
-          <div class="column is-6">
-            <p class="title is-2">Periodic Neural Mapping for Unsteady Rotor-Blade Pressure and Aeroelastic Load Prediction</p>
-            <p class="subtitle is-5">
-              Learning periodic unsteady pressure fields with neural operators to improve aeroelastic load prediction.
-            </p>
-
-            <div class="buttons">
-              <a class="button is-link is-rounded" href="https://arxiv.org/abs/2609.21590" target="_blank">Paper</a>
-              <a class="button is-dark is-rounded" href="#" target="_blank">Code</a>
-              <a class="button is-info is-rounded" href="#" target="_blank">Project</a>
-            </div>
-
-            <div class="content">
-              <p>
-                <strong>TL;DR:</strong> p-FNM learns a continuous mapping from operating conditions and time to rotor-blade pressure fields, preserving periodicity and improving GAF prediction.
-              </p>
-            </div>
-          </div>
-
-          <div class="column is-6">
-            <figure class="image">
-              <img src="images/teaser.png" alt="Teaser figure">
-            </figure>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-10">
-          <div class="box">
-            <h2 class="title is-4">Overview</h2>
-            <p>
-              This paper addresses unsteady pressure prediction on a transonic rotor blade under varying operating conditions.
-              The goal is not only to reconstruct the pressure field accurately, but also to preserve the temporal coherence
-              needed for reliable generalized aerodynamic forces (GAFs).
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section has-background-white-bis">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-10">
-          <h2 class="title is-4">Motivation</h2>
-          <div class="content">
-            <p>
-              High-fidelity URANS simulations are expensive, while aeroelastic quantities depend strongly on the time evolution
-              of the pressure field. Sequential latent-space models can accumulate errors over time and degrade spectral accuracy.
-              This motivates a continuous-time operator-learning formulation.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-10">
-          <h2 class="title is-4">Method</h2>
-          <div class="columns is-variable is-6">
-            <div class="column">
-              <div class="box">
-                <h3 class="title is-6">Input</h3>
-                <p>Operating conditions <em>(α, β, d, Π)</em> and periodic time <em>t</em>.</p>
-              </div>
-            </div>
-            <div class="column">
-              <div class="box">
-                <h3 class="title is-6">Periodic encoding</h3>
-                <p>Time is embedded as <em>(cos(2πt/T), sin(2πt/T))</em> to remove boundary discontinuities.</p>
-              </div>
-            </div>
-            <div class="column">
-              <div class="box">
-                <h3 class="title is-6">p-FNM</h3>
-                <p>A vector-to-function block followed by Fourier layers learns the pressure field directly.</p>
-              </div>
-            </div>
-          </div>
-
-          <figure class="image mt-5">
-            <img src="images/figure3.png" alt="p-FNM architecture, see Figure 3">
-          </figure>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section has-background-white-bis">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-10">
-          <h2 class="title is-4">Dataset</h2>
-          <div class="content">
-            <p>
-              The database contains four training regimes: Small, Medium, Large, and Extra Large, with 20, 40, 80, and 160
-              simulations, plus a separate test set of 40 simulations. Each sample contains 192 time snapshots over one blade-passing period.
-            </p>
-          </div>
-
-          <figure class="image">
-            <img src="images/figure2.png" alt="Dataset and simulation setup, see Figure 2">
-          </figure>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-10">
-          <h2 class="title is-4">Results</h2>
-          <div class="content">
-            <p>
-              p-FNM consistently outperforms the TPM baseline on pressure reconstruction and GAF prediction.
-              On the largest dataset, it reaches 0.46% pressure MAPE and 4.42% GAF magnitude MAPE.
-            </p>
-          </div>
-
-          <div class="columns is-variable is-5">
-            <div class="column">
-              <figure class="image">
-                <img src="images/figure4.png" alt="Pressure prediction results, see Figure 4">
-              </figure>
-            </div>
-            <div class="column">
-              <figure class="image">
-                <img src="images/figure5.png" alt="GAF prediction results, see Figure 5">
-              </figure>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section has-background-white-bis">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-10">
-          <h2 class="title is-4">Key observations</h2>
-          <div class="content">
-            <ul>
-              <li>Pressure errors are mostly concentrated near shock waves.</li>
-              <li>Temporal coherence is critical for accurate spectral quantities.</li>
-              <li>Direct GAF prediction performs worse than predicting pressure first.</li>
-              <li>More training data improves both pressure and GAF accuracy.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-10">
-          <h2 class="title is-4">Qualitative examples</h2>
-          <div class="columns is-variable is-5">
-            <div class="column">
-              <figure class="image">
-                <img src="images/table9.png" alt="Qualitative pressure field examples, see Table 9">
-              </figure>
-            </div>
-            <div class="column">
-              <figure class="image">
-                <img src="images/table10.png" alt="Error maps and comparisons, see Table 10">
-              </figure>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3">Acknowledgments</h2>
-    <div class="content">
-      <p>
-        The presented work has been performed in the framework of the HE-ART project, part of the Clean Aviation Joint Undertaking, and funded by the European Union’s Horizon 2020 research and innovation programme under grant agreement N° 101102013. It was also supported by the "ARIAC by DigitalWallonia4.ai" research project (grant agreement No 2010235– TRAIL institute) and benefited from computational resources made available on the Tier-1 supercomputer of the Fédération Wallonie-Bruxelles, infrastructure funded by the Walloon Region under grant agreement N° 1910847.      </p>
-    </div>
-  </div>
-</section>
 
 <!--BibTex citation -->
   <section class="section" id="BibTeX">
@@ -340,37 +339,34 @@
         </button>
       </div>
       <pre id="bibtex-code"><code>@article{salesses2026periodic,
-      title={Periodic Neural Mapping for Unsteady Rotor-Blade Pressure and Aeroelastic Load Prediction}, 
-      author={Lionel Salesses and Joachim Dominique and Tariq Benamara and Théo Flament and Franck Mastrippolito},
-      year={2026},
-      eprint={2609.21590},
-      archivePrefix={arXiv},
-      primaryClass={physics.flu-dyn},
-      url={https://arxiv.org/abs/2609.21590}, 
-}</code></pre>
+        title={Periodic Neural Mapping for Unsteady Rotor-Blade Pressure and Aeroelastic Load Prediction}, 
+        author={Lionel Salesses and Joachim Dominique and Tariq Benamara and Théo Flament and Franck Mastrippolito},
+        year={2026},
+        eprint={2609.21590},
+        archivePrefix={arXiv},
+        primaryClass={physics.flu-dyn},
+        url={https://arxiv.org/abs/2609.21590}, 
+      }</code></pre>
     </div>
 </section>
 <!--End BibTex citation -->
 
 
-  <footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-
-          <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-
+<footer class="footer">
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-8">
+      <div class="content">
+        <p>
+          This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+          You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+          Commons Attribution-ShareAlike 4.0 International License</a>.
+        </p>
         </div>
       </div>
     </div>
   </div>
 </footer>
 
-
-  </body>
-  </html>
+</body>
+</html>
